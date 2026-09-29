@@ -30,7 +30,7 @@ import java.util.Objects;
 public class ShowDataActivity extends AppCompatActivity {
     FirebaseFirestore db;
     RecyclerView recyclerView;
-    List<User> users = new ArrayList();
+    List<Article> articles = new ArrayList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +47,7 @@ public class ShowDataActivity extends AppCompatActivity {
         //users.add(new User("default", "000"));
 
         recyclerView = findViewById(R.id.reclyclerview);
-        UserViewAdapter adapter = new UserViewAdapter(getBaseContext(), users);
+        ArticleViewAdapter adapter = new ArticleViewAdapter(getBaseContext(), articles);
         recyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext()));
         recyclerView.setAdapter(adapter);
 
@@ -67,17 +67,21 @@ public class ShowDataActivity extends AppCompatActivity {
             }
           }
         });*/
-      db.collection("users").addSnapshotListener(new EventListener<QuerySnapshot>() {
+      // Đọc bài viết trong collection "articles", sắp xếp theo id, tự cập nhật khi dữ liệu đổi
+      db.collection("articles").orderBy("article_id").addSnapshotListener(new EventListener<QuerySnapshot>() {
         @Override
         public void onEvent(@Nullable QuerySnapshot snapshots, @Nullable FirebaseFirestoreException error) {
           if (snapshots != null) {
-            users.clear();
+            articles.clear();
             for (QueryDocumentSnapshot q : snapshots) {
               Map<String, Object> data = q.getData();
-              User user = new User((String) data.get("name"), (String) data.get("phone"));
-              users.add(user);
+              // Firestore lưu số nguyên kiểu Long nên đổi về int
+              Article article = new Article(((Long) data.get("article_id")).intValue(),
+                (String) data.get("article_title"), (String) data.get("article_image"),
+                (String) data.get("article_description"));
+              articles.add(article);
             }
-            adapter.update(users);
+            adapter.update(articles);
             adapter.notifyDataSetChanged();
           }
         }
