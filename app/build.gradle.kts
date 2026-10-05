@@ -39,8 +39,6 @@ dependencies {
   implementation(libs.activity)
   implementation(libs.constraintlayout)
   implementation(libs.firebase.firestore)
-  implementation(libs.okhttp)
-  implementation(libs.gson)
   implementation(libs.picasso)
   testImplementation(libs.junit)
   androidTestImplementation(libs.ext.junit)

@@ -1,24 +1,13 @@
 package vn.edu.ueh.thanhdnh.firebase_example;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
 // Lớp Article giống bài Article trước: 1 bài viết gồm id, tiêu đề, link ảnh, nội dung
 public class Article {
-  @SerializedName("article_id")
-  @Expose
   private int article_id;
 
-  @SerializedName("article_title")
-  @Expose
   private String article_title;
 
-  @SerializedName("article_image")
-  @Expose
   private String article_image;
 
-  @SerializedName("article_description")
-  @Expose
   private String article_description;
 
   public Article(int article_id, String article_title, String article_image, String article_description) {

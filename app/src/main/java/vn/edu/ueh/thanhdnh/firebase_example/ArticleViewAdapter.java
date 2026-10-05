@@ -37,7 +37,7 @@ public class ArticleViewAdapter extends RecyclerView.Adapter<ArticleViewHolder> 
   public void onBindViewHolder(@NonNull ArticleViewHolder holder, int position) {
     Article currentarticle = articles.get(position);
     holder.getTxtTitle().setText(currentarticle.getArticle_id() + ". " + currentarticle.getArticle_title());
-    // File JSON ghi xuống dòng là "\n" dạng chữ nên đổi lại thành xuống dòng thật
+    // Nội dung có chữ "\n" thì đổi lại thành xuống dòng thật
     String description = currentarticle.getArticle_description();
     if (description != null)
       description = description.replace("\\n", "\n");
