@@ -7,10 +7,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-// Giữ các view của 1 dòng bài viết (giống UserViewHolder của thầy)
+// Giữ các view của 1 dòng bài viết (làm theo mẫu UserViewHolder của thầy)
 public class ArticleViewHolder extends RecyclerView.ViewHolder {
   private ImageView imgArticle;
-  private TextView txtTitle, txtDescription;
+  private TextView txtTitle, txtDescription, txtViews;
   private ArticleViewAdapter adapter;
 
   public ArticleViewHolder(@NonNull View itemView, ArticleViewAdapter adapter) {
@@ -18,6 +18,7 @@ public class ArticleViewHolder extends RecyclerView.ViewHolder {
     imgArticle = itemView.findViewById(R.id.img_article);
     txtTitle = itemView.findViewById(R.id.txt_title);
     txtDescription = itemView.findViewById(R.id.txt_description);
+    txtViews = itemView.findViewById(R.id.txt_views);
     this.adapter = adapter;
   }
 
@@ -43,5 +44,13 @@ public class ArticleViewHolder extends RecyclerView.ViewHolder {
 
   public void setTxtDescription(TextView txtDescription) {
     this.txtDescription = txtDescription;
+  }
+
+  public TextView getTxtViews() {
+    return txtViews;
+  }
+
+  public void setTxtViews(TextView txtViews) {
+    this.txtViews = txtViews;
   }
 }

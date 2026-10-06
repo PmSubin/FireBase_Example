@@ -1,51 +1,78 @@
 package vn.edu.ueh.thanhdnh.firebase_example;
 
-// Lớp Article giống bài Article trước: 1 bài viết gồm id, tiêu đề, link ảnh, nội dung
+// Lớp Article: nội dung giống bài UserProfile trước (users.json), thêm số lượt xem
 public class Article {
-  private int article_id;
+  private int id;
+  private String username;
+  private String email;
+  private String desc;
+  private String avatar_url;
+  private String hobby;
+  private long views;
 
-  private String article_title;
-
-  private String article_image;
-
-  private String article_description;
-
-  public Article(int article_id, String article_title, String article_image, String article_description) {
-    this.article_id = article_id;
-    this.article_title = article_title;
-    this.article_image = article_image;
-    this.article_description = article_description;
+  public Article(int id, String username, String email, String desc, String avatar_url, String hobby) {
+    this.id = id;
+    this.username = username;
+    this.email = email;
+    this.desc = desc;
+    this.avatar_url = avatar_url;
+    this.hobby = hobby;
+    this.views = 0;
   }
 
-  public int getArticle_id() {
-    return article_id;
+  public int getId() {
+    return id;
   }
 
-  public void setArticle_id(int article_id) {
-    this.article_id = article_id;
+  public void setId(int id) {
+    this.id = id;
   }
 
-  public String getArticle_title() {
-    return article_title;
+  public String getUsername() {
+    return username;
   }
 
-  public void setArticle_title(String article_title) {
-    this.article_title = article_title;
+  public void setUsername(String username) {
+    this.username = username;
   }
 
-  public String getArticle_image() {
-    return article_image;
+  public String getEmail() {
+    return email;
   }
 
-  public void setArticle_image(String article_image) {
-    this.article_image = article_image;
+  public void setEmail(String email) {
+    this.email = email;
   }
 
-  public String getArticle_description() {
-    return article_description;
+  public String getDesc() {
+    return desc;
   }
 
-  public void setArticle_description(String article_description) {
-    this.article_description = article_description;
+  public void setDesc(String desc) {
+    this.desc = desc;
+  }
+
+  public String getAvatar_url() {
+    return avatar_url;
+  }
+
+  public void setAvatar_url(String avatar_url) {
+    this.avatar_url = avatar_url;
+  }
+
+  public String getHobby() {
+    return hobby;
+  }
+
+  public void setHobby(String hobby) {
+    this.hobby = hobby;
+  }
+
+  public long getViews() {
+    return views;
+  }
+
+  public void setViews(long views) {
+    this.views = views;
   }
 }

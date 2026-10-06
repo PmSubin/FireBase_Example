@@ -47,7 +47,7 @@ public class ShowDataActivity extends AppCompatActivity {
         //users.add(new User("default", "000"));
 
         recyclerView = findViewById(R.id.reclyclerview);
-        ArticleViewAdapter adapter = new ArticleViewAdapter(getBaseContext(), articles);
+        ArticleViewAdapter adapter = new ArticleViewAdapter(this, articles);
         recyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext()));
         recyclerView.setAdapter(adapter);
 
@@ -67,8 +67,8 @@ public class ShowDataActivity extends AppCompatActivity {
             }
           }
         });*/
-      // Đọc bài viết trong collection "articles", sắp xếp theo id, tự cập nhật khi dữ liệu đổi
-      db.collection("articles").orderBy("article_id").addSnapshotListener(new EventListener<QuerySnapshot>() {
+      // Đọc collection "articles", sắp xếp theo id, tự cập nhật khi dữ liệu đổi (kể cả lượt xem)
+      db.collection("articles").orderBy("id").addSnapshotListener(new EventListener<QuerySnapshot>() {
         @Override
         public void onEvent(@Nullable QuerySnapshot snapshots, @Nullable FirebaseFirestoreException error) {
           if (snapshots != null) {
@@ -76,9 +76,13 @@ public class ShowDataActivity extends AppCompatActivity {
             for (QueryDocumentSnapshot q : snapshots) {
               Map<String, Object> data = q.getData();
               // Firestore lưu số nguyên kiểu Long nên đổi về int
-              Article article = new Article(((Long) data.get("article_id")).intValue(),
-                (String) data.get("article_title"), (String) data.get("article_image"),
-                (String) data.get("article_description"));
+              Article article = new Article(((Long) data.get("id")).intValue(),
+                (String) data.get("username"), (String) data.get("email"),
+                (String) data.get("desc"), (String) data.get("avatar_url"),
+                (String) data.get("hobby"));
+              // Bài chưa ai xem thì chưa có field views, coi như 0
+              if (data.get("views") != null)
+                article.setViews((Long) data.get("views"));
               articles.add(article);
             }
             adapter.update(articles);

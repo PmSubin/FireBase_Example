@@ -19,7 +19,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
   FirebaseFirestore db;
   Button btAdd, btShow;
-  EditText etId, etTitle, etImage, etDescription;
+  EditText etId, etUsername, etEmail, etHobby, etAvatar, etDesc;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +37,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     btAdd = findViewById(R.id.btAdd);
     btShow = findViewById(R.id.btShow);
     etId = findViewById(R.id.etId);
-    etTitle = findViewById(R.id.etTitle);
-    etImage = findViewById(R.id.etImage);
-    etDescription = findViewById(R.id.etDescription);
+    etUsername = findViewById(R.id.etUsername);
+    etEmail = findViewById(R.id.etEmail);
+    etHobby = findViewById(R.id.etHobby);
+    etAvatar = findViewById(R.id.etAvatar);
+    etDesc = findViewById(R.id.etDesc);
     btAdd.setOnClickListener(this);
     btShow.setOnClickListener(this);
   }
@@ -48,21 +50,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
   public void onClick(View view) {
     if (view.getId() == R.id.btAdd) {
       String id = etId.getText().toString().trim();
-      String title = etTitle.getText().toString().trim();
-      if (id.isEmpty() || title.isEmpty()) {
-        Toast.makeText(this, "Nhập ít nhất ID và Title", Toast.LENGTH_SHORT).show();
+      String username = etUsername.getText().toString().trim();
+      if (id.isEmpty() || username.isEmpty()) {
+        Toast.makeText(this, "Nhập ít nhất ID và Username", Toast.LENGTH_SHORT).show();
         return;
       }
-      Article article = new Article(Integer.parseInt(id), title,
-        etImage.getText().toString().trim(), etDescription.getText().toString().trim());
+      Article article = new Article(Integer.parseInt(id), username,
+        etEmail.getText().toString().trim(), etDesc.getText().toString().trim(),
+        etAvatar.getText().toString().trim(), etHobby.getText().toString().trim());
       // Code cũ của thầy lưu User: db.collection("users").add(new User(name, phone));
-      // Giờ lưu Article vào collection "articles", lấy ID bài viết làm tên document
+      // Giờ lưu Article vào collection "articles", lấy ID làm tên document
       db.collection("articles").document(id).set(article);
       etId.setText("");
-      etTitle.setText("");
-      etImage.setText("");
-      etDescription.setText("");
-      Toast.makeText(this, "Đã lưu bài viết vào Firestore", Toast.LENGTH_SHORT).show();
+      etUsername.setText("");
+      etEmail.setText("");
+      etHobby.setText("");
+      etAvatar.setText("");
+      etDesc.setText("");
+      Toast.makeText(this, "Đã lưu vào Firestore", Toast.LENGTH_SHORT).show();
     } else if (view.getId() == R.id.btShow) {
       Intent intent = new Intent(getBaseContext(), ShowDataActivity.class);
       startActivity(intent);
