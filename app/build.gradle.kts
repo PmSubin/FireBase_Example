@@ -40,8 +40,6 @@ dependencies {
   implementation(libs.constraintlayout)
   implementation(libs.firebase.firestore)
   implementation(libs.picasso)
-  implementation(libs.okhttp)
-  implementation(libs.gson)
   testImplementation(libs.junit)
   androidTestImplementation(libs.ext.junit)
   androidTestImplementation(libs.espresso.core)
