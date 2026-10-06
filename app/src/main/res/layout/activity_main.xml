@@ -164,6 +164,13 @@
           android:layout_height="wrap_content"
           android:layout_marginStart="16dp"
           android:text="Show DB" />
+
+        <Button
+          android:id="@+id/btLoad"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="16dp"
+          android:text="Load JSON" />
       </LinearLayout>
     </LinearLayout>
   </ScrollView>
